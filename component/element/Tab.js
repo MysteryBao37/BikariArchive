@@ -17,17 +17,16 @@ class Tab extends HTMLElement
                 .tab-item-list {
                     display: flex;
                     align-items: flex-end;
-                    overflow-x: auto;
-                    overflow-y: visible;
-                    height: auto;
+                    height: 32px;
                 }
 
                 .tab-item {
-                    display: block;
+                    overflow: hidden;
                     height: 18px;
                     margin: 0 0 5px 0;
                     padding: 0 12px;
-                    white-space: nowrap;
+                    word-break: break-all;
+                    line-height: 1.5;
                 }
 
                 .tab-item:first-child {
@@ -43,7 +42,9 @@ class Tab extends HTMLElement
                     padding: 3px 12px 6px;
                     border: 1px solid var(--theme-border-color-light);
                     border-top: 4px solid var(--theme-block-color);
+                    border-bottom: 0;
                     background-color: var(--theme-background-color);
+                    z-index: 1;
                 }
 
                 .tab-item:not(.active) {
