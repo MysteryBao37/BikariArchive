@@ -17,6 +17,8 @@ class Tab extends HTMLElement
                 .tab-item-list {
                     display: flex;
                     align-items: flex-end;
+                    overflow-x: auto;
+                    overflow-y: visible;
                     height: auto;
                 }
 
@@ -25,10 +27,15 @@ class Tab extends HTMLElement
                     height: 18px;
                     margin: 0 0 5px 0;
                     padding: 0 12px;
+                    white-space: nowrap;
                 }
 
                 .tab-item:first-child {
                     border-left: 1px solid rgba(0,0,0,0);
+                }
+
+                .tab-item:last-child {
+                    border-right: 1px solid rgba(0,0,0,0);
                 }
 
                 .tab-item:is(.active) {
@@ -36,7 +43,6 @@ class Tab extends HTMLElement
                     padding: 3px 12px 6px;
                     border: 1px solid var(--theme-border-color-light);
                     border-top: 4px solid var(--theme-block-color);
-                    border-bottom: 0;
                     background-color: var(--theme-background-color);
                 }
 
@@ -83,16 +89,18 @@ class Tab extends HTMLElement
         base_item.className = "tab-item";
 
         //创建基内容槽
-        var base_cont = document.createElement("slot");
-        base_cont.style.display = "none";
+        var base_slot = document.createElement("slot");
+        base_slot.style.display = "none";
 
         //循环添加各标签
         for (let i = 0; i < this.itemList.length; i++) {
             let item = base_item.cloneNode(true);
             item.innerHTML = this.itemList[i];
 
-            let content = base_cont.cloneNode(true);
-            content.name = this.itemList[i];
+            let content = base_slot.cloneNode(true);
+            if (this.itemList.length > 1) {
+                content.name = this.itemList[i];
+            }
 
             //初始选中显示
             if (i == this.check) {

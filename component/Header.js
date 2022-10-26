@@ -19,6 +19,13 @@ class Header extends HTMLElement
                 filter: drop-shadow(0px 0px 8px rgba(0,0,0,0.16));
                 z-index: 255;
             }
+
+            @media (max-width: 767px) {
+                .Header {
+                    min-width: var(--size-width-min-mobile);
+                    width: 100vw;
+                }
+            }
             
             #BikariTitle {
                 float: left;

@@ -19,24 +19,28 @@ header, section, footer, aside, nav, main, article, figure {
     --theme-background-color-alpha:rgba(248, 248, 248, 0.88); /* 背景色-透明 */
     --theme-block-color:rgb(255, 232, 144); /* 填充色 */
     --theme-block-color-light:rgb(255, 255, 232); /* 填充色-浅 */
+    --theme-block-color-dark:rgb(252, 210, 94); /* 填充色-深 */
 }
 
 [theme="Hatsusora"] {
     --theme-text-color-light:rgb(65, 155, 212); /* 文本色-高亮 */
     --theme-block-color:rgb(144, 232, 255); /* 填充色 */
     --theme-block-color-light:rgb(232, 255, 255); /* 填充色-浅 */
+    --theme-block-color-dark:rgb(72, 192, 232); /* 填充色-深 */
 }
 
 [theme="Wakatake"] {
     --theme-text-color-light:rgb(32, 184, 128); /* 文本色-高亮 */
     --theme-block-color:rgb(144, 248, 192); /* 填充色 */
     --theme-block-color-light:rgb(232, 255, 248); /* 填充色-浅 */
+    --theme-block-color-dark:rgb(32, 216, 152); /* 填充色-深 */
 }
 
 [theme="Hayasakura"] {
     --theme-text-color-light:rgb(216, 128, 128); /* 文本色-高亮 */
     --theme-block-color:rgb(255, 204, 204); /* 填充色 */
     --theme-block-color-light:rgb(255, 242, 251); /* 填充色-浅 */
+    --theme-block-color-dark:rgb(232, 152, 152); /* 填充色-深 */
 }
 
 @font-face {
@@ -565,11 +569,6 @@ li.Chapter {
 }
 
 @media (max-width: 767px) {
-    .Header {
-        min-width: var(--size-width-min-mobile);
-        width: 100vw;
-    }
-
     .Nakami {
         flex-direction: column;
         gap: 0;
