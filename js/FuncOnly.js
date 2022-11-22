@@ -283,38 +283,6 @@ Nakami.SetLayout = function(index) {
 }
 
 /* ---------------------------------------------------------------- */
-//侧边栏
-var SideBar = new Object;
-
-//滑动
-SideBar.SetSlide = function(state) {
-    var header = document.querySelector("mb-header");
-    var sidebar = document.querySelector("mb-sidebar");
-    
-    switch(state) {
-        case true: { 
-            window.addEventListener("scroll", function () {
-                let mainHeight = header.scrollHeight;
-                if (window.innerWidth < 768 || window.pageYOffset < mainHeight) {
-                    sidebar.style.position = "static";
-                }
-                else {
-                    sidebar.style.position = "sticky";
-                    sidebar.style.top = 32 + "px";
-                }
-            });
-            break;
-        }
-        case false: {
-            document.removeEventListener("scroll");
-            sidebar.style.position = "sticky";
-            sidebar.style.top = "0px";
-            break;
-        }
-    }
-}
-
-/* ---------------------------------------------------------------- */
 //快捷键
 var ShortCut = new Object;
 

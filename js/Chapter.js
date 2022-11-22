@@ -20,11 +20,12 @@ $(document).ready(function() {
     document.title = title + "- 微光茶馆";
 
     //页眉解限
-    var header = document.querySelector("mb-header");
-    header.TopRelease();
+    var Header = document.querySelector("mb-header");
+    Header.TopRelease();
 
     //侧边目录，侧边栏滑动
-    document.querySelector("mb-sidebar").type = "volume";
+    var SideBar = document.querySelector("mb-sidebar");
+    SideBar.type = "volume";
     SideBar.SetSlide(true);
 
     //引入正文

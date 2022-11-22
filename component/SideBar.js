@@ -143,12 +143,12 @@ class SideBar extends HTMLElement
 
     set type(name) {
         if (name == "volume") {
-            this.addVolume();
+            this.AddVolume();
         }
     }
 
     //添加侧边目录
-    addVolume() {
+    AddVolume() {
         var sideBar = this.shadowRoot.querySelector(".SideBar");
         var Index = this.shadowRoot.querySelector("#Index");
     
@@ -205,6 +205,34 @@ class SideBar extends HTMLElement
                 let offset = window.pageYOffset - header_height;
                 if (offset > 0) offset = 0;
                 sideBar.style.height = window.innerHeight + offset - 64 + "px";
+            }
+        }
+    }
+
+    //设置滑动
+    SetSlide(state) {
+        var header = document.querySelector("mb-header");
+        var sidebar = document.querySelector("mb-sidebar");
+        
+        switch(state) {
+            case true: { 
+                window.addEventListener("scroll", function () {
+                    let mainHeight = header.scrollHeight;
+                    if (window.innerWidth < 768 || window.pageYOffset < mainHeight) {
+                        sidebar.style.position = "static";
+                    }
+                    else {
+                        sidebar.style.position = "sticky";
+                        sidebar.style.top = 32 + "px";
+                    }
+                });
+                break;
+            }
+            case false: {
+                document.removeEventListener("scroll");
+                sidebar.style.position = "sticky";
+                sidebar.style.top = "0px";
+                break;
             }
         }
     }
