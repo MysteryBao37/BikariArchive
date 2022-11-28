@@ -146,6 +146,9 @@ Setting.Open = function() {
         $(".setting-close").on("click", function() {
             Setting.Close();
         });
+
+        //设置项初始化
+        Setting.Init();
     });
 
     //不知道为什么但要加载一下
@@ -288,30 +291,29 @@ var ShortCut = new Object;
 
 ShortCut.Init = function() {
     let shortcut = $(".input-shortcut");
-    if (typeof shortcut !== "undefined") {
-        let count = shortcut.length;
-        for (let i = 0; i < count; i++) {
-            //获取id
-            let id = shortcut[i].getAttribute("id");
-    
-            //读取本地变量，若不存在则进行初始化
-            let keyStr = localStorage.getItem(id);
-            if (keyStr === null) {
-                localStorage.setItem(id, this.strToKey(shortcut[i].value));
-            }
-            else {
-                shortcut[i].value = this.keyToStr(keyStr);
-            }
-    
-            //输入逻辑
-            shortcut[i].addEventListener("keypress", (event) => {
-                shortcut[i].value = "";
-            });
-            shortcut[i].addEventListener("keyup", (event) => {
-                shortcut[i].value = this.keyToStr(event.key);
-                localStorage.setItem(id, event.key);
-            });
+    let count = shortcut.length;
+    for (let i = 0; i < count; i++) {
+        //获取id
+        let id = shortcut[i].getAttribute("id");
+
+        //读取本地变量，若不存在则进行初始化
+        let keyStr = localStorage.getItem(id);
+        if (keyStr === null) {
+            localStorage.setItem(id, this.strToKey(shortcut[i].value));
         }
+        else {
+            shortcut[i].value = this.keyToStr(keyStr);
+        }
+
+
+        //输入逻辑
+        shortcut[i].addEventListener("keypress", (event) => {
+            shortcut[i].value = "";
+        });
+        shortcut[i].addEventListener("keyup", (event) => {
+            shortcut[i].value = this.keyToStr(event.key);
+            localStorage.setItem(id, event.key);
+        });
     }
 }
 

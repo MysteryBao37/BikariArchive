@@ -1,5 +1,6 @@
 @import "normalize.css";
 @import "wikilike.css";
+@import "component.css";
 
 /*旧版本浏览器兼容*/
 header, section, footer, aside, nav, main, article, figure {
@@ -59,7 +60,6 @@ body {
     background-attachment: fixed;
 }
 
-/*超链接*/
 a {
     text-decoration: none;
     color: var(--theme-link-color);
@@ -67,6 +67,15 @@ a {
 
 a:hover:not(.active) {
     text-decoration: none;
+}
+
+code {
+    border-radius: 3px;
+    padding: 2px 4px;
+    background-color: var(--theme-block-color-light);
+    font-family: inherit;
+    font-size: 90%;
+    color: var(--theme-text-color-light);
 }
 
 p {

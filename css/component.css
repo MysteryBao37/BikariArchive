@@ -1,0 +1,18 @@
+.AnchorTip-Popups {
+    position: absolute;
+    width: 320px;
+    opacity: 0;
+    padding: 16px;
+    border: 1px solid var(--theme-border-color-light);
+    border-left: 8px solid var(--theme-block-color);
+    border-radius: 3px;
+    background-color: var(--theme-background-color);
+    filter: drop-shadow(0px 0px 8px rgba(0,0,0,0.08));
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.AnchorTip-Details {
+    color: var(--theme-font-color);
+    font-size: 14px;
+}

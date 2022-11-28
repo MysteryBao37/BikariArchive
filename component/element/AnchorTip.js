@@ -26,24 +26,10 @@ class AnchorTip extends HTMLElement
     //显示悬停信息
     ShowHoverTip(event) {
         var Tip = document.createElement("div");
-        Tip.className = "Popups";
-        Tip.style.cssText = `
-            position: absolute;
-            width: 320px;
-            opacity: 0;
-            padding: 16px;
-            border-left: 8px solid var(--theme-block-color);
-            background-color: var(--theme-background-color);
-            filter: drop-shadow(0px 0px 6px rgba(0,0,0,0.20));
-            cursor: pointer;
-            transition: all .2s;
-        `;
+        Tip.className = "AnchorTip-Popups";
 
         var Text = document.createElement("a");
-        Text.style.cssText = `
-            color: var(--theme-font-color);
-            font-size: 14px;
-        `;
+        Text.className = "AnchorTip-Details";
         Tip.appendChild(Text);
 
         //根据链接获取对应内容
@@ -98,7 +84,7 @@ class AnchorTip extends HTMLElement
 
     //隐藏悬停信息
     HideHoverTip(event) {
-        var Tip = document.querySelector(".Popups");
+        var Tip = document.querySelector(".AnchorTip-Popups");
         if (Tip === null) return;
 
         var top = getTop(this) + this.offsetHeight;
