@@ -97,6 +97,9 @@ function ChapterWrap(type)//章节跳转
     })();
 
     //判断下一章节是否存在
+    var Path = Volume[novel][nextvol].Path;
+    var Index = Volume[novel][nextvol].Index[gekka];
+    window.location.href = "../${Path}/novel_${Index}.html";
     window.location.href = "../" + Volume[novel][nextvol].Path + "/novel_" + Volume[novel][nextvol].Index[gekka] + ".html";
 }
 
