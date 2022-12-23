@@ -91,9 +91,6 @@ function ChapterWrap(type)//章节跳转
             else return vol;
     })();
 
-    //判断下一章节是否存在
-    var Path = Volume[novel][nextvol].Path;
-    var Index = Volume[novel][nextvol].Index[gekka];
     window.location.href = "/reader.html?novel=" + novel + "&index=" + Volume[novel][nextvol].Index[gekka];
 }
 
