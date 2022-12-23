@@ -13,6 +13,7 @@ class SideBar extends HTMLElement
                     <li><a href="/index.html">主页</a></li>
                     <li><a href="/catalogue.html">目录</a></li>
                     <li><a href="/details.html">情报</a></li>
+                    <li><a href="/form.html">发布</a></li>
                     <li><a href="javascript:void(0)" onclick="Setting.Open()">设置</a></li>
                 </ul>
             </div>

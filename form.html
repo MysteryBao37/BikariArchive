@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>目录 - 微光茶馆</title>
+	<title>发布 - 微光茶馆</title>
 	<meta charset="UTF-8">
     <meta name="keywords" content="微光茶馆,Bikari">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -19,12 +19,103 @@
 <!-- 内容 -->
 <div class="Nakami">
     <!-- 侧边栏 -->
-    <mb-sidebar check="目录"></mb-sidebar>
+    <mb-sidebar check="发布"></mb-sidebar>
 
     <!-- 正文内容 -->
     <div class="MainContent">
+        <span class="Content-h1 Coco-Title">新章节</span>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="input-box">
+                    <span class="input-name">章节名</span>
+                    <div class="input-cut"></div>
+                    <input class="input-line" id="Chapter-Title"/>
+                </div>
+                <div class="input-box">
+                    <span class="input-name">所属卷</span>
+                    <div class="input-cut"></div>
+                    <select class="input-select" id="Volume">
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="input-box">
+                    <span class="input-name">章序号</span>
+                    <div class="input-cut"></div>
+                    <input class="input-line" id="Chapter-Index" type="number"/>
+                </div>
+            </div>
+        </div>
+        <div class="input-box" style="height: 320px;">
+            <span class="input-name">正文</span>
+            <div class="input-cut"></div>
+            <textarea class="input-textarea" id="Chapter-Text"></textarea>
+        </div>
+        <button id="Release">发布</button>
+        <button id="Clear">清空</button>
     </div>
 </div>
 
 </body>
+<script type="module">
+    import { Volume } from "/data/Volume.js"
+
+    $(document).ready(function() {
+        var Select = document.querySelector("#Volume");
+        var Bikari = Volume["Bikari"];
+        for (var i = 0; i < Bikari.length; i++) {
+            let option = document.createElement("option");
+            option.innerHTML = Bikari[i].Name;
+            Select.appendChild(option);
+        }
+
+        var Index = document.querySelector("#Chapter-Index");
+        Index.addEventListener("input",()=>{
+            var value = Index.value;
+            if (value.length > 5) {
+                Index.value = value.slice(0, 5);
+            }
+        });
+
+        var Title = document.querySelector("#Chapter-Title");
+        var Text = document.querySelector("#Chapter-Text");
+
+        var Release = document.querySelector("#Release");
+        Release.addEventListener("click",()=>{
+            if (Title.value === "") {
+                alert("请输入章节名！");
+                return;
+            }
+            else if (Index.value === "") {
+                alert("请输入章序号！");
+                return;
+            }
+            else if (Text.value === "") {
+                alert("请输入正文！");
+                return;
+            }
+
+            var volume = Select.value;
+            for (var i = 0; i < Bikari.length; i++) {
+                if (Bikari[i].Name === volume) {
+                    if (Bikari[i].Index.indexOf(Index.value) !== -1) {
+                        alert("章序号已存在！");
+                        return;
+                    }
+                    break;
+                }
+            }
+
+            alert("发布成功！");
+        });
+
+        var Clear = document.querySelector("#Clear");
+        Clear.addEventListener("click",()=>{
+            Title.value = "";
+            Index.value = "";
+            Text.value = "";
+            Select[0].selected = true;
+        });
+    })
+</script>
 </html>

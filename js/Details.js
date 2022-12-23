@@ -9,4 +9,8 @@ $(document).ready(function() {
     
     //设置项初始化
     Setting.Init();
+
+    //添加评论区
+    var MainContent = document.querySelector(".MainContent");
+    MainContent.appendChild(document.createElement("mb-comment-area"));
 })

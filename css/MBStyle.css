@@ -51,7 +51,7 @@ header, section, footer, aside, nav, main, article, figure {
 
 body {
     margin: 0;
-    font-family: "Microsoft Yahei UI", "Microsoft Yahei", "宋体";
+    font-family: "Trebuchet", "Microsoft Yahei UI", "Microsoft Yahei", "宋体";
     font-size: 16px;
     color: var(--theme-text-color);
     background-image: url("../image/background.jpg");
@@ -459,26 +459,50 @@ li.Chapter {
 
 .input-name {
     display: block;
+    align-self: center;
     width: 96px;
     text-align: center;
 }
 
-.input-line {
+.input-cut {
     align-self: center;
     width: 1px;
-    height: 16px;
+    height: calc(100% - 22px);
     border-right: 1px solid var(--theme-border-color-dark);
 }
 
-/* 快捷键 */
-.input-shortcut {
+.input-line {
     flex: 1;
-    outline: none;
     width: 100%;
     margin: 2px auto;
     border: 0;
     font-size: 16px;
     text-align: center;
+    outline: none;
+}
+
+.input-line::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input-textarea {
+    flex: 1;
+    width: 100%;
+    margin: 8px;
+    border: 0;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+}
+
+.input-select {
+    flex: 1;
+    width: 100%;
+    margin: 2px auto;
+    border: 0;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
 }
 
 /* 菜单多选框 */
