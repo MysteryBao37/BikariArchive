@@ -8,9 +8,10 @@ var title = "";//章节名
 
 $(document).ready(function() {
     //获取小说名与章文件名
-    var inf = document.getElementsByTagName("inf")[0];
-    novel = inf.getAttribute("novel");
-    index = inf.getAttribute("index");
+    var url = window.location.href;
+    var params = new URLSearchParams(url.split("?")[1]);
+    novel = params.get("novel");
+    index = params.get("index");
 
     //计算卷序号与章序号
     while ((order = Volume[novel][vol].Index.indexOf(index)) == -1) vol++;
@@ -28,30 +29,12 @@ $(document).ready(function() {
     SideBar.type = "volume";
     SideBar.SetSlide(true);
 
-    //引入正文
-    $(".MainContent").load("../../template/Chapter.html", ()=>{MainContentShokika()});
-
-    //键盘监听
-    document.addEventListener("keydown", (event)=>{
-        switch (event.key) {
-            case localStorage.getItem("shortcut-LastChapter"):
-                ChapterWrap(0);
-                break;
-            case localStorage.getItem("shortcut-NextChapter"):
-                ChapterWrap(1);
-                break;
-        }
-    });
-});
-
-function MainContentShokika()
-{
     //正文标题
     document.getElementById("Title").innerHTML = title;
     //所属卷
     document.getElementById("Volume").innerHTML = "<" + Volume[novel][vol].Name + ">";
     //引入正文
-    $(".Novel-Text").load(index + ".txt", function(){
+    $(".Novel-Text").load("/text/" + Volume[novel][vol].Path + "/" + index + ".txt", function(){
         //字数统计
         document.getElementById("WordCount").innerHTML = "字数：" + WordCount();
         //设置项初始化
@@ -78,7 +61,19 @@ function MainContentShokika()
     wrap_Right.addEventListener("click",()=>{ChapterWrap(1)});
     wrap_Bottom_Last.addEventListener("click",()=>{ChapterWrap(0)});
     wrap_Bottom_Next.addEventListener("click",()=>{ChapterWrap(1)});
-}
+
+    //键盘监听
+    document.addEventListener("keydown", (event)=>{
+        switch (event.key) {
+            case localStorage.getItem("shortcut-LastChapter"):
+                ChapterWrap(0);
+                break;
+            case localStorage.getItem("shortcut-NextChapter"):
+                ChapterWrap(1);
+                break;
+        }
+    });
+});
 
 function ChapterWrap(type)//章节跳转
 {
@@ -99,8 +94,7 @@ function ChapterWrap(type)//章节跳转
     //判断下一章节是否存在
     var Path = Volume[novel][nextvol].Path;
     var Index = Volume[novel][nextvol].Index[gekka];
-    window.location.href = "../${Path}/novel_${Index}.html";
-    window.location.href = "../" + Volume[novel][nextvol].Path + "/novel_" + Volume[novel][nextvol].Index[gekka] + ".html";
+    window.location.href = "/reader.html?novel=" + novel + "&index=" + Volume[novel][nextvol].Index[gekka];
 }
 
 function WordCount()//字数统计

@@ -159,9 +159,10 @@ class SideBar extends HTMLElement
         var index = "";//章文件名
 
         //获取小说名与章文件名
-        var inf = document.querySelector("inf");
-        novel = inf.getAttribute("novel");
-        index = inf.getAttribute("index");
+        var url = window.location.href;
+        var params = new URLSearchParams(url.split("?")[1]);
+        novel = params.get("novel");
+        index = params.get("index");
 
         //计算卷序号与章序号
         while ((order = Volume[novel][vol].Index.indexOf(index)) == -1) vol++;
@@ -179,7 +180,7 @@ class SideBar extends HTMLElement
             if (i == order) {
                 a.className = "active";
             }
-            a.href = "novel_" + Volume[novel][vol].Index[i] + ".html";
+            a.href = "/reader.html?novel=" + novel + "&index=" + Volume[novel][vol].Index[i];
             a.innerHTML = Volume[novel][vol].Chapter[i];
             list.appendChild(li);
         }

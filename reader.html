@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="微光茶馆,Bikari">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" type="text/css" href="/css/MBStyle.css">
+    <script type="module" src="/js/MBModule.js"></script>
+    <script type="module" src="/js/Chapter.js"></script>
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="/js/FuncOnly.js"></script>
+</head>
+<body>
+
+<inf novel="Bikari" index="100"></inf>
+
+<!-- 页眉 -->
+<mb-header></mb-header>
+
+<!-- 内容 -->
+<div class="Nakami">
+    <!-- 侧边栏 -->
+    <mb-sidebar></mb-sidebar>
+    <!-- 正文内容 -->
+    <div class="MainContent">
+        <div class="Content-Header">
+            <div class="Novel-WrapBox-Left">
+                <span class="Novel-WrapBox-Arrow">&lt;</span>
+                <span class="Novel-WrapBox-Text">上一章</span>
+            </div>
+            <div class="Novel-Title">
+                <h2 id="Title" style="float: left;"></h2>
+                <div class="Novel-Information">
+                    <span id="Volume"></span>
+                    <span id="WordCount"></span>
+                </div>
+            </div>
+            <div class="Novel-WrapBox-Right">
+                <span class="Novel-WrapBox-Text">下一章</span>
+                <span class="Novel-WrapBox-Arrow">&gt;</span>
+            </div>
+        </div>
+        <hr />
+        <article class="Novel-Text"></article>
+        <article class="ContentExtraArea"></article>
+        <hr />
+        <div class="Novel-WrapBox-Bottom">
+            <span class="LastChapter-Bottom">上一章</span>
+            <span class="NextChapter-Bottom">下一章</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
