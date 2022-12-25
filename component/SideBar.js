@@ -18,7 +18,7 @@ class SideBar extends HTMLElement
                 </ul>
             </div>
             <div class="SideBar-Block" id="Index">
-                <div class="Index-Volume"></div>
+                <select class="Index-Volume"></select>
                 <div class="Index-List">
                     <ul class="demo-vertical">
                     </ul>
@@ -93,8 +93,12 @@ class SideBar extends HTMLElement
             .Index-Volume {
                 margin: 0 16px 8px 16px;
                 padding: 10px 0;
+                border: 0;
                 border-bottom: 1px solid var(--theme-border-color);
+                background-color: rgb(0, 0, 0, 0);
+                font-size: 16px;
                 font-weight: bolder;
+                outline: none;
             }
 
             .Index-List {
@@ -152,7 +156,7 @@ class SideBar extends HTMLElement
     AddVolume() {
         var sideBar = this.shadowRoot.querySelector(".SideBar");
         var Index = this.shadowRoot.querySelector("#Index");
-    
+
         var novel = "";//小说名
         var vol = 0;//卷序号
         var order = 0;//章序号
@@ -168,35 +172,56 @@ class SideBar extends HTMLElement
         while ((order = Volume[novel][vol].Index.indexOf(index)) == -1) vol++;
         
         //为目录添加卷标题
-        var list = Index.getElementsByTagName("ul")[0];
-        this.shadowRoot.querySelector(".Index-Volume").innerHTML = Volume[novel][vol].Name;
+        var Select = this.shadowRoot.querySelector(".Index-Volume");
+        for (let i = 0; i < Volume[novel].length; i++) {
+            var option = document.createElement("option");
+            option.innerHTML = Volume[novel][i].Name;
+            Select.appendChild(option);
+        }
+        Select[vol].selected = true;
+
+        //选择卷，显示对应章节
+        Select.addEventListener("change",()=>{
+            VolumeToChapter(Select.selectedIndex);
+        });
 
         //添加章节
-        let base_li = document.createElement("li");
-        base_li.appendChild(document.createElement("a"));
-        for (let i = 0; i < Volume[novel][vol].Index.length; i++) {
-            let li = base_li.cloneNode(true);
-            let a = li.firstChild;
-            if (i == order) {
-                a.className = "active";
-            }
-            a.href = "/reader.html?novel=" + novel + "&index=" + Volume[novel][vol].Index[i];
-            a.innerHTML = Volume[novel][vol].Chapter[i];
-            list.appendChild(li);
-        }
-    
+        VolumeToChapter(vol);
+
         //高度初始化
         var header = document.querySelector("mb-header").Body();
         let header_height = PxToNumber(getComputedStyle(header).height);
         IndexEvent();
-    
+
         //目录滑动到当前章节处
+        var list = Index.getElementsByTagName("ul")[0];
         list.getElementsByTagName("li")[Math.max(0, order - 1)].scrollIntoView();
     
         //根据浏览器滚动动态调整
         window.addEventListener("scroll", ()=>{IndexEvent()});
         window.addEventListener("resize", ()=>{IndexEvent()});
-    
+
+        function VolumeToChapter(value) {
+            var list = Index.getElementsByTagName("ul")[0];
+            var old_li = list.getElementsByTagName("li");
+            while (old_li.length > 0) {
+                old_li[0].remove();
+            }
+
+            let base_li = document.createElement("li");
+            base_li.appendChild(document.createElement("a"));
+            for (let i = 0; i < Volume[novel][value].Index.length; i++) {
+                let li = base_li.cloneNode(true);
+                let a = li.firstChild;
+                if (i == order && value == vol) {
+                    a.className = "active";
+                }
+                a.href = "/reader.html?novel=" + novel + "&index=" + Volume[novel][value].Index[i];
+                a.innerHTML = Volume[novel][value].Chapter[i];
+                list.appendChild(li);
+            }
+        }
+
         function IndexEvent() {
             if (window.innerWidth < 768) {
                 Index.style.display = "none";
